@@ -1,0 +1,34 @@
+# for importing the tables/database.sql file into the postgres database
+psql -U aaditya_deshmukh -h localhost -p 5432 -W -d db_academic_record < "E:\Database\databases\academicrecord.sql"
+
+#to create database
+CREATE DATABASE database_name;
+
+#list of all database
+\l
+
+#list of all tables
+\dt
+
+#rename the database - first switch to the other database for example postgres
+the write 
+ALTER DATABASE database_old_name RENAME database_new_name;
+
+#switch between database
+\c database name;
+
+
+## there are two type of users in database - super user and regular user
+# to give the privilage to the regular user to switch to super user when needed
+#(need to do be done while being super user)
+GRANT postgres TO user_name;
+
+#switch to super_user
+SET ROLE postgres;
+
+#switch to the regular user
+SET ROLE NONE;
+
+#remove the privilage (need to do be done while being super user)
+REVOKE postgres FROM user_name;
+

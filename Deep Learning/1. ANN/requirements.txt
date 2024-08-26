@@ -1,0 +1,44 @@
+# requirements.txt for Deep Learning
+
+# TensorFlow for deep learning
+tensorflow
+
+# PyTorch for deep learning
+torch
+
+# Keras, a high-level neural networks API
+keras
+
+# Scikit-learn for machine learning tasks
+scikit-learn
+
+# NumPy for numerical computing
+numpy
+
+# Matplotlib for data visualization
+matplotlib
+
+# Seaborn for statistical data visualization
+seaborn
+
+# Jupyter for interactive development
+jupyter
+
+# Pillow for image processing
+Pillow
+
+# OpenCV for computer vision tasks
+opencv-python
+
+# TensorFlow's Object Detection API
+tf_slim
+
+# Fastai library for deep learning
+fastai
+
+# Hugging Face Transformers for natural language processing
+transformers
+
+#pandas 
+pandas
+pandas_datareader
