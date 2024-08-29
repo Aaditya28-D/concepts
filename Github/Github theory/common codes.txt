@@ -1,0 +1,36 @@
+mkdir folder_name = to create a local directory
+
+cd path or folder_name= to navigate to the local directory
+
+git init= to convert that directory into repository 
+
+echo "content of the file">filename.txt = creates new file
+
+git add filename.txt =adds the file to the git staging area
+
+git commit -m "initial commit with readme file" = commits your staged files to the repository
+
+git status = commit history , branches status of the current repository
+
+git log = gives the commit history 
+
+git remote add origin URL = link the local repository to the remote repository
+
+git push -u origin main = push the commit of the local repository to the main branch of the remote repository
+
+git pull origin main = get all the updates from the remote repository to the local repository 
+
+git branch = list all the branches in the repository and mark the current branch as *
+
+git branch -r= delete the remote branch
+
+git checkout branch_name = switching to another branch 
+
+git rm -r * = to remove all the files from the local repository 
+
+git branch -d branch-name - delete a specific local branch 
+
+git push origin --delete branch_name = delete a specific remote branch 
+
+
+
