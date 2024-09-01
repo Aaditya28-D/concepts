@@ -1,0 +1,26 @@
+{
+    "sqltools.connections": [
+        {
+            "previewLimit": 50,
+            "server": "localhost",
+            "port": 5432,
+            "driver": "PostgreSQL",
+            "name": "nasa2_db",
+            "database": "nasa2_db",
+            "username": "Aaditya_Deshmukh",
+            "password": "1236541",
+            "connectionTimeout": 30
+        },
+        {
+            "previewLimit": 50,
+            "server": "localhost",
+            "port": 5432,
+            "driver": "PostgreSQL",
+            "name": "pagila_db",
+            "database": "pagila_db",
+            "username": "Aaditya_Deshmukh",
+            "password": "1236541",
+            "connectionTimeout": 30
+        }
+    ]
+}

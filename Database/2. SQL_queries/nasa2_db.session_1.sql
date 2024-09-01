@@ -1,1 +1,0 @@
-SELECT*FROM nasa2_mission;
