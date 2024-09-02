@@ -2,6 +2,8 @@ SELECT* FROM customer;
 SELECT * FROM inventory;
 SELECT*FROM rental;
 SELECT*FROM film;
+SELECT*FROM category;
+SELECT*FROM film_category;
 
 SELECT first_name, last_name
 FROM customer
@@ -113,3 +115,50 @@ WHERE EXISTS (
     JOIN film f ON i.film_id = f.film_id
     WHERE f.title = 'ACADEMY DINOSAUR' AND r.staff_id = s.staff_id
 );
+
+--identify all languages in which at least one film has not been rented out 
+SELECT DISTINCT l.language_id, l.name
+FROM language l
+JOIN film f ON l.language_id = f.language_id
+WHERE NOT EXISTS (
+    SELECT 1
+    FROM inventory i
+    JOIN rental r ON i.inventory_id =r.inventory_id
+    WHERE i.film_id = f.film_id
+)
+
+-- find all customers who have rented at least one film categorized as Comedy
+SELECT c.customer_id, c.first_name, C.last_name
+FROM customer c
+WHERE EXISTS(
+    SELECT 1
+    FROM rental r
+    JOIN inventory i ON r.inventory_id = i.inventory_id
+    JOIN film_category fc ON i.film_id = fc.film_id
+    JOIN category cy ON fc.category_id=cy.category_id 
+    WHERE cy.name='Comedy' AND c.customer_id = r.customer_id
+);
+
+
+-- find all customers who have rented only films categorized as comedy
+SELECT c.customer_id, c.first_name, c.last_name
+FROM customer c 
+WHERE EXISTS (
+    -- confirm at least one comedy rental exists
+    SELECT 1
+    FROM rental r
+    JOIN inventory i ON r.inventory_id = i.inventory_id
+    JOIN film_category fc ON i.film_id = fc.film_id
+    JOIN category cy ON fc.category_id = cy.category_id 
+    WHERE cy.name='Comedy' AND c.customer_id=r.customer_id 
+)
+AND NOT EXISTS(
+    -- check for any non-comedy rentals byt he customer
+    SELECT 1
+    FROM rental r
+    JOIN inventory i ON r.inventory_id = i.inventory_id
+    JOIN film_category fc ON i.film_id = fc.film_id 
+    JOIN category cy ON fc.category_id = cy.category_id
+    WHERE cy.name <> 'Comedy' AND c.customer_id = r.customer_id 
+);
+
