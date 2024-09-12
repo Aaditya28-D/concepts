@@ -59,3 +59,34 @@ SELECT c.customer_id, c.first_name, c.last_name,
         )as sub
     ) AS films_rented_more_than_once
 FROM customer c;
+
+
+-- list each customer along with the total number of different films they have rented
+SELECT c.customer_id,
+    c.first_name,
+    c.last_name,
+    (
+        SELECT COUNT(DISTINCT i.film_id)
+        FROM rental r
+        JOIN inventory i ON r.inventory_id = i.inventory_id
+        WHERE c.customer_id = r.customer_id
+    )
+FROM customer c;
+
+
+
+--list each film's title along with the name of the store that has the most copies of that film in inventory 
+SELECT 
+    f.film_id, 
+    f.title,
+    (
+        SELECT s.store_id
+        FROM inventory i
+        JOIN store s ON i.store_id = s.store_id
+        WHERE i.film_id = f.film_id
+        GROUP BY s.store_id
+        ORDER BY COUNT(i.inventory_id) DESC
+        LIMIT 1
+    ) AS store_with_most_copies
+FROM 
+    film f;
