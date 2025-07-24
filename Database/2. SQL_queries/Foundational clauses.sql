@@ -67,5 +67,19 @@ HAVING AVG(rental_rate)>2.00
 ORDER BY avg_rental_rate DESC;
 
 
+-- list the names of actors who have appreared in more than 15 films,
+-- sorted by the nubmer of films they have appeared in descending order. 
 
+SELECT a.actor_id,
+    a.first_name,
+    a.last_name,
+    COUNT(fc.film_id) as films_count
+FROM actor a
+    JOIN film_actor fc ON a.actor_id = fc.actor_id
+GROUP BY a.actor_id, a.first_name, a.last_name
+HAVING COUNT(fc.film_id) > 15
+ORDER BY films_count DESC;
+
+-- Identify the stores that have not achieved any rentals in the month of July 2022.
+-- List the store ID and the city where each store is located 
 
