@@ -556,4 +556,4 @@ WHERE
         LIMIT 1
     );
 
---WHERE (EXISTS) subqueries
+--WHERE (EXISTS) subqueries updated next 
