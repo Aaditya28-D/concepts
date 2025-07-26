@@ -1,0 +1,97 @@
+# Core Data Analysis
+pandas
+numpy
+openpyxl
+xlrd
+pyxlsb
+
+# Data Visualization
+matplotlib
+seaborn
+plotly
+pydeck
+
+# Machine Learning
+scikit-learn
+xgboost
+lightgbm
+catboost
+
+# Deep Learning
+tensorflow
+keras
+torch
+torchvision
+transformers
+
+# NLP
+nltk
+spacy
+gensim
+textblob
+
+# Web Scraping / Requests
+requests
+beautifulsoup4
+selenium
+lxml
+
+# Web Frameworks
+flask
+fastapi
+streamlit
+dash
+
+# Jupyter & Notebook
+jupyter
+jupyterlab
+ipykernel
+nbformat
+notebook
+widgetsnbextension
+traitlets
+
+# Utility Libraries
+scipy
+joblib
+tqdm
+pyyaml
+pydantic
+tenacity
+tabulate
+watchdog
+regex
+pyperclip
+python-dateutil
+pytz
+pendulum
+
+# File Handling
+python-docx
+pdfplumber
+reportlab
+Pillow
+opencv-python
+
+# Cloud & Databases
+sqlalchemy
+pymongo
+boto3
+
+# Developer Tools
+pytest
+coverage
+autopep8
+pylint
+black
+isort
+mypy
+faker
+
+# Security & Auth
+cryptography
+python-jose
+
+# Async / Websocket
+aiohttp
+websockets
