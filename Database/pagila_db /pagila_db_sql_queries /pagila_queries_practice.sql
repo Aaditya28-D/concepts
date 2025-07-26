@@ -555,3 +555,5 @@ WHERE
             COUNT(city_id) DESC
         LIMIT 1
     );
+
+--WHERE (EXISTS) subquery next
