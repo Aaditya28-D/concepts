@@ -352,6 +352,84 @@ WHERE
     );
 
 
+-- WHERE NOT IN
+--WHEN YOU want to exclude certain row based on another set of data 
+--Its the opposite of IN
+-- there should not by any null value in subquery . then the query fails and returns nothing
+
+--EXAMPLE : list the title of all films that have never been rented
+SELECT
+    title
+FROM
+    film
+WHERE
+    film_id NOT IN (
+        SELECT
+            inventory.film_id
+        FROM
+            inventory
+            JOIN rental ON inventory.inventory_id=rental.inventory_id
+            WHERE inventory.film_id IS NOT NULL
+    );
+
+
+
+
+
+
+--WHERE NOT IN subquery practice question 1
+-- list the first_name, last_name, of customer who have never made any payment
+SELECT
+    first_name,
+    last_name
+FROM
+    customer
+WHERE customer_id  NOT IN(
+    SELECT
+        customer_id
+    FROM
+        payment
+    WHERE customer_id IS NOT NULL
+);
+
+--question 2
+--list the title of all films that are not in the comedy category 
+SELECT
+    title
+FROM
+    film
+WHERE
+    film_id NOT IN (
+        SELECT
+            film_category.film_id
+        FROM
+            film_category
+            JOIN category ON film_category.category_id=category.category_id
+        WHERE 
+            category.name ='Comedy' 
+            AND film_category.film_id IS NOT NULL
+    );
+
+
+SELECT
+    first_name,
+    last_name
+FROM
+    customer
+WHERE
+    customer_id NOT IN (
+        SELECT
+            customer_id
+        FROM
+            rental
+        WHERE
+            customer_id IS NOT NULL
+    );
+
+
+
+
+
 -- WHERE ..=(subquery)
 --return exactly one value to compare directly with that value 
 
@@ -556,4 +634,174 @@ WHERE
         LIMIT 1
     );
 
---WHERE (EXISTS) subqueries updated next 
+-- WHERE (!=/<>) subqueries
+-- both means not equal to 
+--EXAMPLE: 
+SELECT
+    title
+    rental_rate
+FROM
+    film
+WHERE
+    rental_rate <> (
+        SELECT
+            AVG(rental_rate)
+        FROM
+            film
+    );
+
+
+--!=/<> subquery - question 1
+--list the first_name and last_name of customers whose total payment is not equal to the average total payment of all customers
+
+SELECT
+    first_name,
+    last_name
+FROM
+    customer
+WHERE
+    (
+        SELECT
+            SUM(amount)
+        FROM
+            payment
+        WHERE 
+            payment.customer_id=customer.customer_id
+
+    ) <>(
+        SELECT
+            AVG(total_amount)
+        FROM (
+            SELECT
+                customer_id,
+                SUM(amount) AS total_amount
+            FROM
+                payment
+            GROUP BY
+                customer_id
+        ) AS customer_totals
+    );
+
+
+
+
+
+
+
+--WHERE (EXISTS) subqueries updated next when the it is dynamic database (some times the data is there sometimes it is not)
+-- Example: show customer who have made at least one payment 
+
+SELECT
+    first_name,
+    last_name
+FROM
+    customer
+WHERE EXISTS (
+    SELECT 1
+    FROM payment
+    WHERE payment.customer_id = customer.customer_id
+);
+
+
+-- EXISTS subquery practice question 1
+-- list the first_name and last_name of all customers who have made at least one payment 
+SELECT
+    first_name,
+    last_name
+FROM
+    customer
+WHERE
+     EXISTS (
+        SELECT
+            1
+        FROM
+            payment
+        WHERE
+            payment.customer_id =customer.customer_id
+    );
+
+
+-- EXISTS subquery practice question 2
+-- list the first_name and last_name of all staff members who have processed at least one payment 
+SELECT
+    first_name,
+    last_name
+FROM
+    staff
+WHERE 
+    EXISTS (
+        SELECT  1
+        FROM 
+            payment
+        WHERE
+            payment.staff_id=staff.staff_id
+    );
+
+
+-- EXists Subquery Practice question 3
+-- list the title of all films that have been rented at least once 
+
+SELECT
+    title
+FROM
+    film
+WHERE
+    EXISTS (
+        SELECT 1
+        FROM 
+        inventory
+        JOIN rental ON inventory.inventory_id=rental.inventory_id
+        WHERE inventory.film_id=film.film_id
+    );
+
+-- EXISTS SUBQUERY practice question 4 
+-- list the first_name and last_name of all customers who have rented a film from store 1
+SELECT
+    first_name,
+    last_name
+FROM
+    customer
+WHERE
+    EXISTS (
+        SELECT 1
+        FROM
+            rental
+            JOIN staff ON rental.staff_id=staff.staff_id
+            JOIN store ON staff.store_id=store.store_id
+        WHERE  rental.customer_id=customer.customer_id AND store.store_id=1
+    );
+
+SELECT
+    first_name,
+    last_name
+FROM
+    customer
+WHERE
+    EXISTS (
+        SELECT 1
+        FROM 
+            inventory
+            JOIN rental ON inventory.inventory_id=rental.inventory_id
+            WHERE rental.customer_id=customer.customer_id AND inventory.store_id=1
+    );
+
+
+-- EXISTS Subquery practice question 5
+-- list the title of all films that have been rented by customers living in the district california
+
+SELECT
+    title
+FROM
+    film
+WHERE
+    EXISTS (
+        SELECT 1
+        FROM
+            address
+            JOIN customer ON address.address_id=customer.address_id
+            JOIN rental ON customer.customer_id=rental.customer_id
+            JOIN inventory ON rental.inventory_id=inventory.inventory_id
+        WHERE inventory.film_id=film.film_id AND address.district='California'
+    );
+
+
