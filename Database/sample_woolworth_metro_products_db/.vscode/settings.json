@@ -1,0 +1,25 @@
+{
+    "sqltools.connections": [
+        {
+            "previewLimit": 50,
+            "server": "localhost",
+            "port": 5432,
+            "driver": "PostgreSQL",
+            "name": "nasa2_db",
+            "database": "nasa2_db",
+            "username": "Aaditya_Deshmukh",
+            "password": "1236541",
+            "connectionTimeout": 30
+        },
+        {
+            "previewLimit": 30,
+            "server": "localhost",
+            "port": 5432,
+            "driver": "PostgreSQL",
+            "name": "metro_db",
+            "database": "metro_db",
+            "username": "Aaditya_Deshmukh",
+            "password": "1236541"
+        }
+    ]
+}
