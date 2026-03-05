@@ -1,0 +1,18 @@
+# OS cruft
+.DS_Store
+
+# Python
+__pycache__/
+*.pyc
+.venv/
+.env
+
+# Jupyter
+.ipynb_checkpoints/
+
+# Models / large artifacts (keep out of git by default)
+models/*.pt
+models/*.pth
+
+# Derived data
+data/processed/
